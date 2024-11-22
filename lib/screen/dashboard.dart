@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:my_reminder_app/controllers/data_provider.dart';
 import 'package:my_reminder_app/controllers/general_controller.dart';
 import 'package:my_reminder_app/controllers/notifi_fire.dart';
+import 'package:my_reminder_app/functionality_widget/colors.dart';
 import 'package:my_reminder_app/login.dart';
 import 'package:my_reminder_app/screen/add_agenda.dart';
 import 'package:my_reminder_app/screen/jadwal.dart';
@@ -48,6 +49,7 @@ class _DashboardState extends State<Dashboard> {
     final notificationProvider = Provider.of<NotificationProvider>(context);
 
     return Scaffold(
+      backgroundColor: AppColors.background,
       body: RefreshIndicator(
         onRefresh: () {
           return Navigator.pushReplacement(
@@ -69,7 +71,7 @@ class _DashboardState extends State<Dashboard> {
               children: [
                 const SizedBox(height: 20),
                 Padding(
-                  padding: EdgeInsets.only(
+                  padding: const EdgeInsets.only(
                       left: 16.0, right: 16, top: 50, bottom: 10),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -78,22 +80,27 @@ class _DashboardState extends State<Dashboard> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           const Text(
-                            "Hallo, Welcome brack",
-                            style:
-                                TextStyle(fontFamily: "Poppins", fontSize: 18),
+                            "Hallo, Welcome back",
+                            style: TextStyle(
+                                fontFamily: "Poppins",
+                                fontSize: 18,
+                                color: AppColors.primary),
                           ),
                           userName == null
                               ? const CircularProgressIndicator()
                               : Container(
-                                  padding: EdgeInsets.only(left: 5, right: 60),
-                                  decoration: BoxDecoration(
-                                    color: Colors.blue.withOpacity(0.2),
+                                  padding:
+                                      const EdgeInsets.only(left: 5, right: 60),
+                                  decoration: const BoxDecoration(
+                                    color: AppColors.primary,
+                                    borderRadius: BorderRadius.only(bottomRight: Radius.circular(8))
                                   ),
                                   child: Text(
                                     userName!,
                                     style: const TextStyle(
                                         fontFamily: "Poppins",
                                         fontSize: 14,
+                                        color: AppColors.surface,
                                         fontWeight: FontWeight.w500),
                                   ),
                                 ),
@@ -114,7 +121,7 @@ class _DashboardState extends State<Dashboard> {
                         child: Container(
                             padding: const EdgeInsets.all(12),
                             decoration: BoxDecoration(
-                                color: Colors.blue.withOpacity(0.2),
+                                color: AppColors.primary,
                                 borderRadius: BorderRadius.circular(12)),
                             child: const Icon(
                               Icons.person_2_rounded,
@@ -128,12 +135,22 @@ class _DashboardState extends State<Dashboard> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   child: Container(
-                    height: 160,
-                    decoration: BoxDecoration(
-                        color: Colors.blue.withOpacity(0.2),
-                        borderRadius: const BorderRadius.only(
-                            bottomRight: Radius.circular(12),
-                            bottomLeft: Radius.circular(12))),
+                    // height: 160,
+                    decoration: const BoxDecoration(
+                        // color: Colors.blue.withOpacity(0.2),
+                        borderRadius: BorderRadius.only(
+                            topRight: Radius.circular(12),
+                            topLeft: Radius.circular(12))),
+                    child: ClipRRect(
+                      borderRadius: const BorderRadius.only(
+                        topRight: Radius.circular(12),
+                        topLeft: Radius.circular(12),
+                      ),
+                      child: Image.asset(
+                        'assets/banner1.png',
+                        fit: BoxFit.contain,
+                      ),
+                    ),
                   ),
                 ),
                 Padding(
@@ -149,16 +166,18 @@ class _DashboardState extends State<Dashboard> {
                               isShort = !isShort;
                             });
                           },
-                          child: Row(
+                          child: const Row(
                             children: [
-                              const Text(
+                              Text(
                                 "Agenda",
-                                style: TextStyle(
-                                    fontFamily: "Poppins",
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w500),
+                                style: const TextStyle(
+                                  fontFamily: "Poppins",
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w500,
+                                ),
                               ),
-                              Icon(Icons.sort)
+                              Icon(Icons.arrow_drop_down_sharp,
+                                  color: AppColors.primary),
                             ],
                           ),
                         ),
