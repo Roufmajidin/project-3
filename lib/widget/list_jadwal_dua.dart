@@ -4,6 +4,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:my_reminder_app/functionality_widget/c.dart';
+import 'package:my_reminder_app/functionality_widget/colors.dart';
 import 'package:my_reminder_app/functionality_widget/enum.dart';
 import 'package:my_reminder_app/functionality_widget/get_jam_terkahir.dart';
 
@@ -97,8 +98,17 @@ class _JadwalScreenState extends State<JadwalScreen> {
                             width: MediaQuery.of(context).size.width,
                             // height: 140,
                             decoration: BoxDecoration(
-                                color: const Color.fromARGB(255, 223, 223, 223)
-                                    .withOpacity(0.3),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color:
+                                        const Color.fromARGB(255, 160, 159, 159)
+                                            .withOpacity(0.1),
+                                    spreadRadius: 6,
+                                    blurRadius: 10,
+                                    offset: const Offset(2, 1), //
+                                  ),
+                                ],
+                                color: AppColors.surface.withOpacity(0.8),
                                 borderRadius: const BorderRadius.only(
                                     bottomRight: Radius.circular(12),
                                     bottomLeft: Radius.circular(12))),

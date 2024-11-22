@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:my_reminder_app/controllers/data_provider.dart';
 import 'package:my_reminder_app/controllers/notifi_fire.dart';
+import 'package:my_reminder_app/functionality_widget/colors.dart';
 import 'package:my_reminder_app/screen/add_agenda.dart';
 import 'package:my_reminder_app/screen/dashboard.dart';
 import 'package:my_reminder_app/widget/list_jadwal.dart';
@@ -67,6 +68,14 @@ class _JadwalPageState extends State<JadwalPage>
     final DatabaseReference scheduleRef =
         FirebaseDatabase.instance.reference().child("guru/$userName");
     return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: Text(
+          "Jadwal Page",
+          style: TextStyle(fontFamily: "Poppins", fontSize: 18),
+        ),
+      ),
+      backgroundColor: AppColors.background,
       body: RefreshIndicator(
         onRefresh: () {
           return Navigator.pushReplacement(
@@ -79,28 +88,6 @@ class _JadwalPageState extends State<JadwalPage>
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(height: 20),
-              const Padding(
-                padding:
-                    EdgeInsets.only(left: 16.0, right: 16, top: 50, bottom: 10),
-                child: Center(
-                  child: Text(
-                    "Jadwal Page",
-                    style: TextStyle(fontFamily: "Poppins", fontSize: 18),
-                  ),
-                ),
-              ),
-              // const Padding(
-              //   padding: EdgeInsets.symmetric(horizontal: 16),
-              //   child: Text(
-              //     "Agenda",
-              //     style: TextStyle(
-              //         fontFamily: "Poppins",
-              //         fontSize: 16,
-              //         fontWeight: FontWeight.w500),
-              //   ),
-              // ),
-              const SizedBox(height: 20),
               SizedBox(
                 height: 80,
                 width: MediaQuery.of(context).size.width,
@@ -120,7 +107,6 @@ class _JadwalPageState extends State<JadwalPage>
                       return const Center(child: Text('No data available'));
                     }
 
-                   
                     List<String> weekOrder = [
                       'senin',
                       'selasa',
@@ -131,25 +117,36 @@ class _JadwalPageState extends State<JadwalPage>
                       // 'minggu'
                     ];
                     // Sort the uniqueDays based on the predefined weekOrder
-                    
+
                     return Padding(
-                        padding: const EdgeInsets.only(right: 8.0),
-                        child: TabBar(
-                          tabAlignment: TabAlignment.start,
-                          controller: _tabController,
-                          onTap: (value) {
-                            var uniqd = uniqueDays;
-                            // selectedDate = day;
-                            changeStatus(value); // Pass the tapped tab's index
-                            log(selectedDate.toString());
-                          },
-                          isScrollable: true,
-                          tabs: weekOrder.map((day) {
-                            return Tab(
-                              text:
-                                  day, // Assuming you have a capitalize method for the day names
-                            );
-                          }).toList(),
+                        padding: const EdgeInsets.only(right: 0),
+                        child: Container(
+                          decoration: BoxDecoration(
+                              color: AppColors.surface.withOpacity(0.8)),
+                          child: TabBar(
+                            
+                            indicatorColor: AppColors.primary,
+                            labelStyle: const TextStyle(
+                                fontFamily: "Poppins",
+                                color: AppColors.textPrimary),
+                            tabAlignment: TabAlignment.start,
+                            controller: _tabController,
+                            onTap: (value) {
+                              var uniqd = uniqueDays;
+                              // selectedDate = day;
+                              changeStatus(
+                                  value); // Pass the tapped tab's index
+                              log(selectedDate.toString());
+                            },
+                            isScrollable: true,
+                            tabs: weekOrder.map((day) {
+                              return Tab(
+
+                                text:
+                                    day, // Assuming you have a capitalize method for the day names
+                              );
+                            }).toList(),
+                          ),
                         ));
                   },
                 ),
@@ -178,7 +175,11 @@ class _JadwalPageState extends State<JadwalPage>
               ),
               // list keudua
               // data
-            JadwalScreen(hari: selectedDate,isShort: false,userName: userName.toString(),)
+              JadwalScreen(
+                hari: selectedDate,
+                isShort: false,
+                userName: userName.toString(),
+              )
             ],
           );
         }),

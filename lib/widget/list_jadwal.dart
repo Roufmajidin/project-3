@@ -7,6 +7,8 @@ import 'package:my_reminder_app/functionality_widget/c.dart';
 import 'package:my_reminder_app/functionality_widget/enum.dart';
 import 'package:my_reminder_app/functionality_widget/get_jam_terkahir.dart';
 
+import '../functionality_widget/colors.dart';
+
 class DataJadwal extends StatefulWidget {
   String userName;
 
@@ -35,12 +37,12 @@ class _DataJadwalState extends State<DataJadwal> {
           .remove();
 
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Schedule deleted successfully')),
+        const SnackBar(content: Text('Schedule deleted successfully')),
       );
     } catch (e) {
       print('Error deleting schedule: $e');
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Failed to delete schedule')),
+        const SnackBar(content: Text('Failed to delete schedule')),
       );
     }
   }
@@ -53,7 +55,7 @@ class _DataJadwalState extends State<DataJadwal> {
     return Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),
         child: SizedBox(
-            height: MediaQuery.of(context).size.height * 0.6,
+            height: MediaQuery.of(context).size.height * 0.5,
             child: StreamBuilder<DatabaseEvent>(
                 stream: scheduleRef.onValue,
                 builder: (context, snapshot) {
@@ -128,6 +130,7 @@ class _DataJadwalState extends State<DataJadwal> {
                   log("sore ${sortedData.toList()}");
 
                   return ListView.builder(
+                    // padding: EdgeInsets.only(bottom: 25),
                       itemCount: widget.isShort == false
                           ? mengajarData.length
                           : sortedData.length,
@@ -146,9 +149,10 @@ class _DataJadwalState extends State<DataJadwal> {
                                 ? mengajarDetails['waktu']
                                 : sorted['waktu']);
                         // var
-                        String a = getJamDanMenitTerkahir(widget.isShort == false
-                            ? mengajarDetails['waktu']
-                            : sorted['waktu']);
+                        String a = getJamDanMenitTerkahir(
+                            widget.isShort == false
+                                ? mengajarDetails['waktu']
+                                : sorted['waktu']);
                         final scheduleTimeTerkahir =
                             DateFormat("HH:mm").parse(a); // Parse waktu
 
@@ -166,11 +170,17 @@ class _DataJadwalState extends State<DataJadwal> {
                             padding: const EdgeInsets.only(bottom: 8.0),
                             child: Container(
                               width: MediaQuery.of(context).size.width,
-                              // height: 140,
                               decoration: BoxDecoration(
-                                  color:
-                                      const Color.fromARGB(255, 223, 223, 223)
-                                          .withOpacity(0.3),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: const Color.fromARGB(255, 160, 159, 159)
+                                          .withOpacity(0.1),
+                                      spreadRadius: 6,
+                                      blurRadius: 10,
+                                      offset: const Offset(2, 1), //
+                                    ),
+                                  ],
+                                  color: AppColors.surface.withOpacity(0.8),
                                   borderRadius: const BorderRadius.only(
                                       bottomRight: Radius.circular(12),
                                       bottomLeft: Radius.circular(12))),
@@ -215,6 +225,7 @@ class _DataJadwalState extends State<DataJadwal> {
                                               mengajarDetails['hari'],
                                               style: const TextStyle(
                                                   fontFamily: "Poppins",
+                                                  color: AppColors.primary,
                                                   fontSize: 16,
                                                   fontWeight: FontWeight.w500),
                                             ),
@@ -293,9 +304,16 @@ class _DataJadwalState extends State<DataJadwal> {
                               width: MediaQuery.of(context).size.width,
                               // height: 140,
                               decoration: BoxDecoration(
-                                  color:
-                                      const Color.fromARGB(255, 223, 223, 223)
-                                          .withOpacity(0.3),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: const Color.fromARGB(255, 160, 159, 159)
+                                          .withOpacity(0.1),
+                                      spreadRadius: 6,
+                                      blurRadius: 10,
+                                      offset: const Offset(2, 1),
+                                    ),
+                                  ],
+                                color: AppColors.surface.withOpacity(0.8),
                                   borderRadius: const BorderRadius.only(
                                       bottomRight: Radius.circular(12),
                                       bottomLeft: Radius.circular(12))),
@@ -341,6 +359,7 @@ class _DataJadwalState extends State<DataJadwal> {
                                               style: const TextStyle(
                                                   fontFamily: "Poppins",
                                                   fontSize: 16,
+                                                  color: AppColors.primary,
                                                   fontWeight: FontWeight.w500),
                                             ),
                                           ),
