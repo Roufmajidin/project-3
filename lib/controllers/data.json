@@ -1,0 +1,39 @@
+{
+    "guru": {
+        "idawati": {
+            "id": "01",
+            "nama": "Ida Wati, S.pdf",
+            "email": "idawati@mail.com",
+            "mapel" : "Matematika",
+            "mengajar": [{
+                    "kelas": "3A",
+                    "waktu": "08:00-10:00",
+                    "tanggal": "19/11/2024"
+                },
+                {
+                    "kelas": "3B",
+                    "waktu": "10:00-12:00",
+                    "tanggal": "19/11/2024"
+                }
+            ]
+        },
+        "majid": {
+            "id": "02",
+            "nama": "Rouf Majid S.kom",
+            "email": "majid@mail.com",
+            "mapel" : "IPA",
+            "mengajar": [{
+                    "kelas": "4A",
+                    "waktu": "08:00-10:00",
+                    "tanggal": "19/11/2024"
+                },
+                {
+                    "kelas": "4A",
+                    "waktu": "10:00-12:00",
+                    "tanggal": "19/11/2024"
+                }
+            ]
+        }
+        
+    }
+}
